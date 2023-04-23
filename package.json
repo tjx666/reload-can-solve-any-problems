@@ -1,8 +1,8 @@
 {
-    "name": "awesome-vscode-extension-boilerplate",
-    "displayName": "Awesome VSCode Extension Boilerplate",
-    "version": "0.0.11",
-    "description": "An awesome vscode extension boilerplate",
+    "name": "reload-can-solve-any-problems",
+    "displayName": "Reload Can Solve Any Problems",
+    "version": "0.0.0",
+    "description": "provide a highly customizable status bar to reload vscode and extensions",
     "publisher": "YuTengjing",
     "private": true,
     "preview": true,
@@ -12,18 +12,18 @@
         "email": "ytj2713151713@gmail.com"
     },
     "license": "SEE LICENSE IN LICENSE",
-    "homepage": "https://github.com/tjx666/awesome-vscode-extension-boilerplate/blob/master/README.md",
+    "homepage": "https://github.com/tjx666/reload-can-solve-any-problems/blob/master/README.md",
     "repository": {
         "type": "git",
-        "url": "https://github.com/tjx666/awesome-vscode-extension-boilerplate"
+        "url": "https://github.com/tjx666/reload-can-solve-any-problems"
     },
     "bugs": {
-        "url": "https://github.com/tjx666/awesome-vscode-extension-boilerplate/issues",
+        "url": "https://github.com/tjx666/reload-can-solve-any-problems/issues",
         "email": "ytj2713151713@gmail.com"
     },
     "keywords": [
-        "boilerplate",
-        "template"
+        "reload",
+        "status bar"
     ],
     "categories": [
         "Other"
@@ -37,15 +37,119 @@
         {
             "url": "https://img.shields.io/badge/PRs-welcome-brightgreen.svg",
             "description": "PRs Welcome",
-            "href": "https://github.com/tjx666/awesome-vscode-extension-boilerplate"
+            "href": "https://github.com/tjx666/reload-can-solve-any-problems"
         }
     ],
-    "activationEvents": [],
+    "activationEvents": [
+        "onStartupFinished"
+    ],
     "contributes": {
-        "commands": [
+        "configuration": {
+            "title": "Reload Can Solve Any Problems",
+            "properties": {
+                "reload-can-solve-any-problems.statusBar": {
+                    "type": "object",
+                    "properties": {
+                        "text": {
+                            "type": "string"
+                        },
+                        "commandId": {
+                            "type": "string"
+                        },
+                        "alignment": {
+                            "type": "string",
+                            "enum": [
+                                "left",
+                                "right"
+                            ]
+                        },
+                        "priority": {
+                            "description": "The priority of the item. Higher values mean the item should be shown more to the left.",
+                            "type": "number"
+                        }
+                    },
+                    "default": {
+                        "text": "$(debug-restart)",
+                        "commandId": "workbench.action.reloadWindow",
+                        "alignment": "left",
+                        "priority": 1
+                    }
+                },
+                "reload-can-solve-any-problems.reloadItems": {
+                    "type": "array",
+                    "reloadItems": {
+                        "type": "object",
+                        "properties": {
+                            "name": {
+                                "description": "shown on left side of tooltip",
+                                "type": "string"
+                            },
+                            "operations": {
+                                "description": "operation items on right side of tooltip",
+                                "type": "array",
+                                "items": {
+                                    "type": "object",
+                                    "properties": {
+                                        "text": {
+                                            "description": "operation item text",
+                                            "type": "string"
+                                        },
+                                        "title": {
+                                            "description": "operation item hover text",
+                                            "type": "string"
+                                        },
+                                        "commandId": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "default": [
+                        {
+                            "name": "ESLint",
+                            "operations": [
+                                {
+                                    "text": "$(debug-restart)",
+                                    "title": "Reload",
+                                    "commandId": "eslint.restart"
+                                }
+                            ]
+                        },
+                        {
+                            "name": "TypeScript",
+                            "operations": [
+                                {
+                                    "text": "$(debug-restart)",
+                                    "title": "Reload",
+                                    "commandId": "typescript.restartTsServer"
+                                }
+                            ]
+                        },
+                        {
+                            "name": "Volar",
+                            "operations": [
+                                {
+                                    "text": "$(project)",
+                                    "title": "Reload Project",
+                                    "commandId": "volar.action.reloadProject"
+                                },
+                                {
+                                    "text": "$(server-process)",
+                                    "title": "Restart Vue server",
+                                    "commandId": "volar.action.restartServer"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            }
+        },
+        "keybindings": [
             {
-                "command": "awesome-vscode-extension-boilerplate.helloWorld",
-                "title": "Hello World"
+                "key": "cmd+r",
+                "command": "workbench.action.reloadWindow"
             }
         ]
     },

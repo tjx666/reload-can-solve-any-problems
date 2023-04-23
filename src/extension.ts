@@ -1,45 +1,44 @@
-import vscode from 'vscode';
+import type { ExtensionContext } from 'vscode';
+import { workspace, StatusBarAlignment, MarkdownString, window } from 'vscode';
 
 import { configuration, updateConfiguration } from './configuration';
 
-export function activate(context: vscode.ExtensionContext) {
-    vscode.workspace.onDidChangeConfiguration(updateConfiguration, null, context.subscriptions);
-
-    const disposable = vscode.commands.registerCommand(
-        'awesome-vscode-extension-boilerplate.helloWorld',
-        () => {
-            vscode.window.showInformationMessage(
-                'Hello World from Awesome VSCode Extension Boilerplate!',
-            );
-        },
-    );
-
-    const statusBarItem = vscode.window.createStatusBarItem(vscode.StatusBarAlignment.Left, 1);
-    statusBarItem.text = configuration.statusBar.icon;
-    statusBarItem.command = configuration.statusBar.commandId;
-
-    const tooltip = new vscode.MarkdownString();
-    tooltip.isTrusted = true;
-    tooltip.supportThemeIcons = true;
-    tooltip.supportHtml = true;
+function generateMarkdownFromConfig() {
     const { reloadItems } = configuration;
     const spaces = Array.from({ length: 12 }, () => '&nbsp').join('');
     const tableBody = reloadItems
         .map((item) => {
             const operations = item.operations
                 .map((op) => {
-                    return `<td><a href="command:${op.commandId}" title="${op.title}">${op.icon}</a></td>`;
+                    return `<td><a href="command:${op.commandId}" title="${op.title}">${op.text}</a></td>`;
                 })
                 .join('<td>&nbsp;&nbsp;</td>');
-            return `<tr><td>${item.title}</td><td>${spaces}</td>${operations}</tr>`;
+            return `<tr><td>${item.name}</td><td>${spaces}</td>${operations}</tr>`;
         })
         .join('');
-    tooltip.appendMarkdown(`<table>${tableBody}</table>`);
+    return `<table>${tableBody}</table>`;
+}
+
+export function activate(context: ExtensionContext) {
+    workspace.onDidChangeConfiguration(updateConfiguration, null, context.subscriptions);
+
+    const statusBarItem = window.createStatusBarItem(
+        configuration.statusBar.alignment === 'left'
+            ? StatusBarAlignment.Left
+            : StatusBarAlignment.Right,
+        configuration.statusBar.priority,
+    );
+    statusBarItem.text = configuration.statusBar.text;
+    statusBarItem.command = configuration.statusBar.commandId;
+
+    const tooltip = new MarkdownString();
+    tooltip.isTrusted = true;
+    tooltip.supportThemeIcons = true;
+    tooltip.supportHtml = true;
+    tooltip.appendMarkdown(generateMarkdownFromConfig());
     statusBarItem.tooltip = tooltip;
 
     statusBarItem.show();
-
-    context.subscriptions.push(disposable);
 }
 
 export function deactivate() {}
