@@ -1,46 +1,28 @@
-# vscode extension boilerplate
+# Reload Can Solve Any Problems
 
 <div align="center">
 
-[![Version](https://img.shields.io/visual-studio-marketplace/v/YuTengjing.awesome-vscode-extension-boilerplate)](https://marketplace.visualstudio.com/items/YuTengjing.awesome-vscode-extension-boilerplate/changelog) [![Installs](https://img.shields.io/visual-studio-marketplace/i/YuTengjing.awesome-vscode-extension-boilerplate)](https://marketplace.visualstudio.com/items?itemName=YuTengjing.awesome-vscode-extension-boilerplate) [![Downloads](https://img.shields.io/visual-studio-marketplace/d/YuTengjing.awesome-vscode-extension-boilerplate)](https://marketplace.visualstudio.com/items?itemName=YuTengjing.awesome-vscode-extension-boilerplate) [![Rating Star](https://img.shields.io/visual-studio-marketplace/stars/YuTengjing.awesome-vscode-extension-boilerplate)](https://marketplace.visualstudio.com/items?itemName=YuTengjing.awesome-vscode-extension-boilerplate&ssr=false#review-details) [![Last Updated](https://img.shields.io/visual-studio-marketplace/last-updated/YuTengjing.awesome-vscode-extension-boilerplate)](https://github.com/tjx666/awesome-vscode-extension-boilerplate)
+[![Version](https://img.shields.io/visual-studio-marketplace/v/YuTengjing.reload-can-solve-any-problems)](https://marketplace.visualstudio.com/items/YuTengjing.reload-can-solve-any-problems/changelog) [![Installs](https://img.shields.io/visual-studio-marketplace/i/YuTengjing.reload-can-solve-any-problems)](https://marketplace.visualstudio.com/items?itemName=YuTengjing.reload-can-solve-any-problems) [![Downloads](https://img.shields.io/visual-studio-marketplace/d/YuTengjing.reload-can-solve-any-problems)](https://marketplace.visualstudio.com/items?itemName=YuTengjing.reload-can-solve-any-problems) [![Rating Star](https://img.shields.io/visual-studio-marketplace/stars/YuTengjing.reload-can-solve-any-problems)](https://marketplace.visualstudio.com/items?itemName=YuTengjing.reload-can-solve-any-problems&ssr=false#review-details) [![Last Updated](https://img.shields.io/visual-studio-marketplace/last-updated/YuTengjing.reload-can-solve-any-problems)](https://github.com/tjx666/reload-can-solve-any-problems)
 
-![test](https://github.com/tjx666/awesome-vscode-extension-boilerplate/actions/workflows/test.yml/badge.svg) [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat)](http://makeapullrequest.com) [![Github Open Issues](https://img.shields.io/github/issues/tjx666/awesome-vscode-extension-boilerplate)](https://github.com/tjx666/awesome-vscode-extension-boilerplate/issues) [![LICENSE](https://img.shields.io/badge/license-Anti%20996-blue.svg?style=flat-square)](https://github.com/996icu/996.ICU/blob/master/LICENSE)
+![test](https://github.com/tjx666/reload-can-solve-any-problems/actions/workflows/test.yml/badge.svg) [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat)](http://makeapullrequest.com) [![Github Open Issues](https://img.shields.io/github/issues/tjx666/reload-can-solve-any-problems)](https://github.com/tjx666/reload-can-solve-any-problems/issues) [![LICENSE](https://img.shields.io/badge/license-Anti%20996-blue.svg?style=flat-square)](https://github.com/996icu/996.ICU/blob/master/LICENSE)
 
 </div>
 
 ## Features
 
-- github actions support publish extension to both vs marketplace and open vsx
-- pnpm/eslint/prettier/ling-staged/simple-git-hooks/stale-dep
-- use esbuild to bundle extension
+- highly customizable status bar to reload vscode and extensions
+- reload window shortcut <kbd>⌘</kbd>+<kbd>R</kbd>
 
-## Development
-
-Install dependencies by:
-
-```shell
-pnpm install
-```
-
-Then run and debug extension like in [official documentation](https://code.visualstudio.com/api/get-started/your-first-extension)
-
-## Publish
-
-You need set two github actions secrets:
-
-- VS_MARKETPLACE_TOKEN: [Visual Studio Marketplace token](https://learn.microsoft.com/azure/devops/organizations/accounts/use-personal-access-tokens-to-authenticate)
-- OPEN_VSX_TOKEN: [Open VSX Registry token](https://github.com/eclipse/openvsx/wiki/Publishing-Extensions#3-create-an-access-token)
-
-```shell
-pnpm release
-```
+![usage](assets/screenshots/usage.png)
 
 ## My extensions
 
 - [Open in External App](https://github.com/tjx666/open-in-external-app)
+- [Package Manager Enhancer](https://github.com/tjx666/package-manager-enhancer)
 - [Neo File Utils](https://github.com/tjx666/vscode-neo-file-utils)
 - [VSCode FE Helper](https://github.com/tjx666/vscode-fe-helper)
 - [VSCode archive](https://github.com/tjx666/vscode-archive)
+- [Better Colorizer](https://github.com/tjx666/better-colorizer/tree/main)
 - [Modify File Warning](https://github.com/tjx666/modify-file-warning)
 - [Power Edit](https://github.com/tjx666/power-edit)
 - [Adobe Extension Development Tools](https://github.com/tjx666/vscode-adobe-extension-devtools)
