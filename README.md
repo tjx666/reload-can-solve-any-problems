@@ -11,9 +11,97 @@
 ## Features
 
 - highly customizable status bar to reload vscode and extensions
-- reload window shortcut <kbd>⌘</kbd>+<kbd>R</kbd>
+- add `reload window` shortcut <kbd>⌘</kbd>+<kbd>R</kbd>
 
-![usage](assets/screenshots/usage.png)
+![usage](https://github.com/tjx666/reload-can-solve-any-problems/blob/main/assets/screenshots/usage.png?raw=true)
+
+## Configure
+
+You can totally control how the status bar and it's tooltip display:
+
+```jsonc
+{
+  "reload-can-solve-any-problems.statusBar": {
+    // by default is $(debug-restart)
+    // check icon usage and all icons list: https://code.visualstudio.com/api/references/icons-in-labels#icons-in-labels
+    "text": "Reload",
+    // you can find all command in command plate by shortcut `cmd + shift + p`
+    // or `cmd + k cmd + s` in keyboard shortcuts setting
+    "commandId": "workbench.action.reloadWindow",
+    "alignment": "right",
+    "priority": 1
+  },
+  "reload-can-solve-any-problems.reloadItems": [
+    {
+      "name": "ESLint",
+      "operations": [
+        {
+          "text": "$(refresh)",
+          "title": "Reload",
+          "commandId": "eslint.restart"
+        }
+      ]
+    },
+    {
+      "name": "TypeScript",
+      "operations": [
+        {
+          "text": "$(refresh)",
+          "title": "Reload",
+          "commandId": "typescript.restartTsServer"
+        }
+      ]
+    },
+    {
+      "name": "Volar",
+      "operations": [
+        {
+          "text": "Reload Project",
+          "title": "Reload Project",
+          "commandId": "volar.action.reloadProject"
+        },
+        {
+          "text": "Restart Vue Server",
+          "title": "Restart Vue Server",
+          "commandId": "volar.action.restartServer"
+        }
+      ]
+    }
+    // {
+    //   "name": "Stylelint",
+    //   "operations": [
+    //     {
+    //       "text": "$(refresh)",
+    //       "title": "Reload",
+    //       "commandId": "stylelint.xxx"
+    //     }
+    //   ]
+    // },
+  ]
+}
+```
+
+Following is the effect of above configuration:
+
+![configure](https://github.com/tjx666/reload-can-solve-any-problems/blob/main/assets/screenshots/configure.png?raw=true)
+
+## Inspiration
+
+### About the extension name
+
+I mainly help my team to maintain the front-end build system this year. They often ask me about the vscode intelisence problem such as `Why my eslint errors disappear?` Most of their problems can be solved by reloading extension or reloading vscode. So, this is why I named the extension: **Reload Can Solve Any Problems**.
+
+### Why add `reload window` shortcut?
+
+VSCode had a builtin command `workbench.action.reloadWindow` to reload window, but it's builtin shortcut can only be used under extension development host, which means you need to call it by command plate most of time.
+
+But in fact, the reload command is almost daily used, and many users are not familiar with vscode settings. So, it would be convenient to provide it for new users.
+
+### Why add status bar?
+
+I will throw a screenshot which means to reload the vscode first when my colleagues ask me about vscode issue. Click a button would be easier to understand than open command plate and run command.
+
+This extension also help you to organize the common reload commands of extensions by status bar tooltip.
 
 ## My extensions
 
