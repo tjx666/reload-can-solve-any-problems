@@ -117,3 +117,9 @@ This extension also help you to organize the common reload commands of extension
 - [Scripting Listener](https://github.com/tjx666/scripting-listener)
 
 Check all here: [publishers/YuTengjing](https://marketplace.visualstudio.com/publishers/YuTengjing)
+
+## TODO
+
+- 支持修改配置实时渲染
+- 优化配置，部分设置设置为 required
+- 调用命令前检查插件是否存在

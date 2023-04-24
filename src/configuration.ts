@@ -1,5 +1,7 @@
 import vscode from 'vscode';
 
+import { extensionName } from './utils/constants';
+
 interface Configuration {
     statusBar: {
         text: string;
@@ -13,12 +15,12 @@ interface Configuration {
             text: string;
             title: string;
             commandId: string;
+            statusBarProgressMessage?: string;
         }>;
     }>;
 }
 
 export const configuration = {} as Configuration;
-const extensionName = 'reload-can-solve-any-problems';
 export function updateConfiguration() {
     const extensionConfig = vscode.workspace.getConfiguration(extensionName);
     configuration.statusBar = extensionConfig.get('statusBar') as Configuration['statusBar'];

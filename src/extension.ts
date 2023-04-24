@@ -1,44 +1,33 @@
-import type { ExtensionContext } from 'vscode';
-import { workspace, StatusBarAlignment, MarkdownString, window } from 'vscode';
+import type { ExtensionContext, StatusBarItem } from 'vscode';
+import { commands, workspace, StatusBarAlignment, window } from 'vscode';
 
 import { configuration, updateConfiguration } from './configuration';
+import { createTooltip } from './createTooltip';
+import { commandIds } from './utils/constants';
 
-function generateMarkdownFromConfig() {
-    const { reloadItems } = configuration;
-    const spaces = Array.from({ length: 12 }, () => '&nbsp').join('');
-    const tableBody = reloadItems
-        .map((item) => {
-            const operations = item.operations
-                .map((op) => {
-                    return `<td><a href="command:${op.commandId}" title="${op.title}">${op.text}</a></td>`;
-                })
-                .join('<td>&nbsp;&nbsp;</td>');
-            return `<tr><td>${item.name}</td><td>${spaces}</td>${operations}</tr>`;
-        })
-        .join('');
-    return `<table>${tableBody}</table>`;
-}
-
+let statusBarItem: StatusBarItem;
 export function activate(context: ExtensionContext) {
     workspace.onDidChangeConfiguration(updateConfiguration, null, context.subscriptions);
 
-    const statusBarItem = window.createStatusBarItem(
+    context.subscriptions.push(
+        commands.registerCommand(commandIds.runReloadCommand, (...args: any[]) => {
+            import('./commands/runReloadCommand').then((mod) =>
+                (mod.runReloadCommand as any)(...args),
+            );
+        }),
+    );
+
+    const alignment =
         configuration.statusBar.alignment === 'left'
             ? StatusBarAlignment.Left
-            : StatusBarAlignment.Right,
-        configuration.statusBar.priority,
-    );
+            : StatusBarAlignment.Right;
+    statusBarItem = window.createStatusBarItem(alignment, configuration.statusBar.priority);
     statusBarItem.text = configuration.statusBar.text;
     statusBarItem.command = configuration.statusBar.commandId;
-
-    const tooltip = new MarkdownString();
-    tooltip.isTrusted = true;
-    tooltip.supportThemeIcons = true;
-    tooltip.supportHtml = true;
-    tooltip.appendMarkdown(generateMarkdownFromConfig());
-    statusBarItem.tooltip = tooltip;
-
+    statusBarItem.tooltip = createTooltip();
     statusBarItem.show();
 }
 
-export function deactivate() {}
+export function deactivate() {
+    statusBarItem.dispose();
+}

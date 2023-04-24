@@ -100,6 +100,9 @@
                                         },
                                         "commandId": {
                                             "type": "string"
+                                        },
+                                        "statusBarProgressMessage": {
+                                            "type": "string"
                                         }
                                     }
                                 }
@@ -113,7 +116,8 @@
                                 {
                                     "text": "$(debug-restart)",
                                     "title": "Reload",
-                                    "commandId": "eslint.restart"
+                                    "commandId": "eslint.restart",
+                                    "statusBarProgressMessage": "Reload ESlint"
                                 }
                             ]
                         },
@@ -121,8 +125,14 @@
                             "name": "TypeScript",
                             "operations": [
                                 {
-                                    "text": "$(debug-restart)",
-                                    "title": "Reload",
+                                    "text": "$(project)",
+                                    "title": "Restart TypeScript Projects",
+                                    "commandId": "typescript.reloadProjects",
+                                    "statusBarProgressMessage": "Reload TypeScript Projects"
+                                },
+                                {
+                                    "text": "$(server-process)",
+                                    "title": "Restart TypeScript Server",
                                     "commandId": "typescript.restartTsServer"
                                 }
                             ]
@@ -133,11 +143,12 @@
                                 {
                                     "text": "$(project)",
                                     "title": "Reload Project",
-                                    "commandId": "volar.action.reloadProject"
+                                    "commandId": "volar.action.reloadProject",
+                                    "statusBarProgressMessage": "Reload Volar Projects"
                                 },
                                 {
                                     "text": "$(server-process)",
-                                    "title": "Restart Vue server",
+                                    "title": "Restart Vue Server",
                                     "commandId": "volar.action.restartServer"
                                 }
                             ]
