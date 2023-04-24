@@ -139,7 +139,7 @@
                             "operations": [
                                 {
                                     "text": "$(project)",
-                                    "title": "Restart TypeScript Projects",
+                                    "title": "Reload TypeScript Projects",
                                     "commandId": "typescript.reloadProjects",
                                     "statusBarProgressMessage": "Reload TypeScript Projects"
                                 },
@@ -156,9 +156,9 @@
                             "operations": [
                                 {
                                     "text": "$(project)",
-                                    "title": "Reload Project",
+                                    "title": "Reload Vue Project",
                                     "commandId": "volar.action.reloadProject",
-                                    "statusBarProgressMessage": "Reload Volar Projects"
+                                    "statusBarProgressMessage": "Reload Vue Project"
                                 },
                                 {
                                     "text": "$(server-process)",

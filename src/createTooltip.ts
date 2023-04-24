@@ -9,7 +9,8 @@ function createMdStr() {
     const tableBody = reloadItems
         // only display active extension
         .filter((item) => {
-            return extensions.getExtension(item.extensionId) !== undefined;
+            const extension = extensions.getExtension(item.extensionId);
+            return extension !== undefined;
         })
         .map((item) => {
             const operations = item.operations
