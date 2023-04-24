@@ -72,7 +72,7 @@
                         "text": "$(debug-restart)",
                         "commandId": "workbench.action.reloadWindow",
                         "alignment": "left",
-                        "priority": 1
+                        "priority": 100
                     }
                 },
                 "reload-can-solve-any-problems.reloadItems": {
@@ -82,6 +82,9 @@
                         "properties": {
                             "name": {
                                 "description": "shown on left side of tooltip",
+                                "type": "string"
+                            },
+                            "extensionId": {
                                 "type": "string"
                             },
                             "operations": {
@@ -112,6 +115,7 @@
                     "default": [
                         {
                             "name": "ESLint",
+                            "extensionId": "dbaeumer.vscode-eslint",
                             "operations": [
                                 {
                                     "text": "$(debug-restart)",
@@ -123,6 +127,7 @@
                         },
                         {
                             "name": "TypeScript",
+                            "extensionId": "vscode.typescript-language-features",
                             "operations": [
                                 {
                                     "text": "$(project)",
@@ -139,6 +144,7 @@
                         },
                         {
                             "name": "Volar",
+                            "extensionId": "Vue.volar",
                             "operations": [
                                 {
                                     "text": "$(project)",

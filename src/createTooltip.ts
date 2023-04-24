@@ -1,4 +1,4 @@
-import { MarkdownString } from 'vscode';
+import { MarkdownString, extensions } from 'vscode';
 
 import { configuration } from './configuration';
 import { commandIds } from './utils/constants';
@@ -7,11 +7,16 @@ function createMdStr() {
     const { reloadItems } = configuration;
     const spaces = Array.from({ length: 12 }, () => '&nbsp').join('');
     const tableBody = reloadItems
+        // only display active extension
+        .filter((item) => {
+            return extensions.getExtension(item.extensionId) !== undefined;
+        })
         .map((item) => {
             const operations = item.operations
                 .map((op) => {
                     const args = encodeURI(
                         JSON.stringify({
+                            extensionId: item.extensionId,
                             commandId: op.commandId,
                             statusBarProgressMessage: op.statusBarProgressMessage,
                         }),

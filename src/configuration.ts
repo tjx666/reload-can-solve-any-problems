@@ -11,6 +11,7 @@ interface Configuration {
     };
     reloadItems: Array<{
         name: string;
+        extensionId: string;
         operations: Array<{
             text: string;
             title: string;

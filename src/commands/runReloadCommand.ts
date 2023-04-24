@@ -3,6 +3,7 @@ import { setTimeout } from 'node:timers/promises';
 import { window, commands, ProgressLocation } from 'vscode';
 
 interface RunReloadCommandArgs {
+    extensionId: string;
     commandId: string;
     args?: any[];
     statusBarProgressMessage?: string;
@@ -17,7 +18,8 @@ export async function runReloadCommand(args: RunReloadCommandArgs) {
             },
             async (_progress) => {
                 await Promise.all([
-                    setTimeout(1500),
+                    // make sure user can see the message
+                    setTimeout(2000),
                     commands.executeCommand(args.commandId, ...(args.args ?? [])),
                 ]);
             },
