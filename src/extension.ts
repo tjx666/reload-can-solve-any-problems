@@ -6,17 +6,8 @@ import { createTooltip } from './createTooltip';
 import { commandIds } from './utils/constants';
 
 let statusBarItem: StatusBarItem;
-export function activate(context: ExtensionContext) {
-    workspace.onDidChangeConfiguration(updateConfiguration, null, context.subscriptions);
 
-    context.subscriptions.push(
-        commands.registerCommand(commandIds.runReloadCommand, (...args: any[]) => {
-            import('./commands/runReloadCommand').then((mod) =>
-                (mod.runReloadCommand as any)(...args),
-            );
-        }),
-    );
-
+function createReloadStatusBarItem() {
     const alignment =
         configuration.statusBar.alignment === 'left'
             ? StatusBarAlignment.Left
@@ -26,6 +17,34 @@ export function activate(context: ExtensionContext) {
     statusBarItem.command = configuration.statusBar.commandId;
     statusBarItem.tooltip = createTooltip();
     statusBarItem.show();
+}
+
+export function activate(context: ExtensionContext) {
+    workspace.onDidChangeConfiguration(updateConfiguration, null, context.subscriptions);
+
+    workspace.onDidChangeConfiguration(
+        (event) => {
+            // recreate
+            if (event.affectsConfiguration('reload-can-solve-any-problems')) {
+                if (statusBarItem) {
+                    statusBarItem.dispose();
+                }
+                createReloadStatusBarItem();
+            }
+        },
+        null,
+        context.subscriptions,
+    );
+
+    context.subscriptions.push(
+        commands.registerCommand(commandIds.runReloadCommand, (...args: any[]) => {
+            import('./commands/runReloadCommand').then((mod) =>
+                (mod.runReloadCommand as any)(...args),
+            );
+        }),
+    );
+
+    createReloadStatusBarItem();
 }
 
 export function deactivate() {
