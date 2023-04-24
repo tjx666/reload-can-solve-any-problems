@@ -48,15 +48,19 @@
             "title": "Reload Can Solve Any Problems",
             "properties": {
                 "reload-can-solve-any-problems.statusBar": {
+                    "description": "Adjust the display of reload status bar item",
                     "type": "object",
                     "properties": {
                         "text": {
+                            "description": "The text of reload status bar item",
                             "type": "string"
                         },
                         "commandId": {
+                            "description": "The command id will run when you click reload status bar item",
                             "type": "string"
                         },
                         "alignment": {
+                            "description": "Control reload status bar item show on left or right side of status bar",
                             "type": "string",
                             "enum": [
                                 "left",
@@ -76,6 +80,7 @@
                     }
                 },
                 "reload-can-solve-any-problems.reloadItems": {
+                    "description": "Will only show the items of enabled extensions",
                     "type": "array",
                     "reloadItems": {
                         "type": "object",
@@ -85,26 +90,29 @@
                                 "type": "string"
                             },
                             "extensionId": {
+                                "description": "The extension id this reload item related to",
                                 "type": "string"
                             },
                             "operations": {
-                                "description": "operation items on right side of tooltip",
+                                "description": "Operation items on right side of tooltip",
                                 "type": "array",
                                 "items": {
                                     "type": "object",
                                     "properties": {
                                         "text": {
-                                            "description": "operation item text",
+                                            "description": "Operation item text",
                                             "type": "string"
                                         },
                                         "title": {
-                                            "description": "operation item hover text",
+                                            "description": "Operation item hover text",
                                             "type": "string"
                                         },
                                         "commandId": {
+                                            "description": "Will execute the given command when you click the operation item",
                                             "type": "string"
                                         },
                                         "statusBarProgressMessage": {
+                                            "description": "Some extension will not show any indicator when run the command, you can set a progress message for it",
                                             "type": "string"
                                         }
                                     }
