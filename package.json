@@ -181,6 +181,7 @@
                     ]
                 },
                 "reload-can-solve-any-problems.reloadServers": {
+                    "description": "All the commands will be executed in parallel",
                     "type": "array",
                     "items": {
                         "type": "object",

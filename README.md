@@ -12,78 +12,87 @@
 
 - highly customizable status bar to reload vscode and extensions
 - add `reload window` shortcut <kbd>⌘</kbd>+<kbd>R</kbd>
+- provide a command `Reload Servers` to reload all extensions servers, you can configure the servers by setting `reload-can-solve-any-problems.reloadServers`.
 
 ![usage](https://github.com/tjx666/reload-can-solve-any-problems/blob/main/assets/screenshots/usage.png?raw=true)
 
 ## Configure
 
-You can totally control how the status bar and it's tooltip display:
+You can totally control how the status bar and it's tooltip display.
 
 ```jsonc
 {
   "reload-can-solve-any-problems.statusBar": {
-    // by default is $(debug-restart)
-    // check icon usage and all icons list: https://code.visualstudio.com/api/references/icons-in-labels#icons-in-labels
-    "text": "Reload",
-    // you can find all command in command plate by shortcut `cmd + shift + p`
-    // or `cmd + k cmd + s` in keyboard shortcuts setting
+    "text": "$(debug-restart)",
     "commandId": "workbench.action.reloadWindow",
-    "alignment": "right",
-    "priority": 1
+    "alignment": "left",
+    "priority": 100
   },
   "reload-can-solve-any-problems.reloadItems": [
     {
       "name": "ESLint",
+      "extensionId": "dbaeumer.vscode-eslint",
       "operations": [
         {
-          "text": "$(refresh)",
-          "title": "Reload",
-          "commandId": "eslint.restart"
+          "text": "$(debug-restart)",
+          "title": "Reload ESLint",
+          "commandId": "eslint.restart",
+          "statusBarProgressMessage": "Reload ESlint"
         }
       ]
     },
     {
       "name": "TypeScript",
+      "extensionId": "vscode.typescript-language-features",
       "operations": [
         {
-          "text": "$(refresh)",
-          "title": "Reload",
+          "text": "$(project)",
+          "title": "Reload TypeScript Projects",
+          "commandId": "typescript.reloadProjects",
+          "statusBarProgressMessage": "Reload TypeScript Projects"
+        },
+        {
+          "text": "$(server-process)",
+          "title": "Restart TypeScript Server",
           "commandId": "typescript.restartTsServer"
         }
       ]
     },
     {
       "name": "Volar",
+      "extensionId": "Vue.volar",
       "operations": [
         {
-          "text": "Reload Project",
-          "title": "Reload Project",
-          "commandId": "volar.action.reloadProject"
+          "text": "$(project)",
+          "title": "Volar Reload Projects",
+          "commandId": "volar.action.reloadProject",
+          "statusBarProgressMessage": "Volar Reload Projects"
         },
         {
-          "text": "Restart Vue Server",
+          "text": "$(server-process)",
           "title": "Restart Vue Server",
-          "commandId": "volar.action.restartServer"
+          "commandId": "volar.action.restartServer",
+          "statusBarProgressMessage": "Restart Vue Server"
         }
       ]
     }
-    // {
-    //   "name": "Stylelint",
-    //   "operations": [
-    //     {
-    //       "text": "$(refresh)",
-    //       "title": "Reload",
-    //       "commandId": "stylelint.xxx"
-    //     }
-    //   ]
-    // },
+  ],
+  "reload-can-solve-any-problems.reloadServers": [
+    {
+      "extensionId": "dbaeumer.vscode-eslint",
+      "commandId": "eslint.restart"
+    },
+    {
+      "extensionId": "vscode.typescript-language-features",
+      "commandId": "typescript.reloadProjects"
+    },
+    {
+      "extensionId": "Vue.volar",
+      "commandId": "volar.action.reloadProject"
+    }
   ]
 }
 ```
-
-Following is the effect of above configuration:
-
-![configure](https://github.com/tjx666/reload-can-solve-any-problems/blob/main/assets/screenshots/configure.png?raw=true)
 
 ## Inspiration
 
@@ -117,9 +126,3 @@ This extension also help you to organize the common reload commands of extension
 - [Scripting Listener](https://github.com/tjx666/scripting-listener)
 
 Check all here: [publishers/YuTengjing](https://marketplace.visualstudio.com/publishers/YuTengjing)
-
-## TODO
-
-- 支持修改配置实时渲染
-- 优化配置，部分设置设置为 required
-- 调用命令前检查插件是否存在
