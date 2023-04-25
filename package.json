@@ -1,7 +1,7 @@
 {
     "name": "reload-can-solve-any-problems",
     "displayName": "Reload Can Solve Any Problems",
-    "version": "0.0.1",
+    "version": "0.1.0",
     "description": "provide a highly customizable status bar to reload vscode and extensions",
     "publisher": "YuTengjing",
     "private": true,
