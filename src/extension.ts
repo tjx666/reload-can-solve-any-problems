@@ -20,12 +20,12 @@ function createReloadStatusBarItem() {
 }
 
 export function activate(context: ExtensionContext) {
-    workspace.onDidChangeConfiguration(updateConfiguration, null, context.subscriptions);
-
     workspace.onDidChangeConfiguration(
         (event) => {
             // recreate
             if (event.affectsConfiguration('reload-can-solve-any-problems')) {
+                updateConfiguration();
+
                 if (statusBarItem) {
                     statusBarItem.dispose();
                 }
