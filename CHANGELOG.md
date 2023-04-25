@@ -1,5 +1,11 @@
 <!-- https://keepachangelog.com/en/1.0.0/ -->
 
+## 0.1.1 - 2023-04-26
+
+### Changed
+
+- perf: only updateConfiguration when affects extension
+
 ## 0.1.0 - 2023-04-26
 
 ### Added
