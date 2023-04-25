@@ -44,6 +44,12 @@
         "onStartupFinished"
     ],
     "contributes": {
+        "commands": [
+            {
+                "command": "reload-can-solve-any-problems.reloadServers",
+                "title": "Reload Servers"
+            }
+        ],
         "configuration": {
             "title": "Reload Can Solve Any Problems",
             "properties": {
@@ -127,7 +133,7 @@
                             "operations": [
                                 {
                                     "text": "$(debug-restart)",
-                                    "title": "Reload",
+                                    "title": "Reload ESLint",
                                     "commandId": "eslint.restart",
                                     "statusBarProgressMessage": "Reload ESlint"
                                 }
@@ -156,9 +162,9 @@
                             "operations": [
                                 {
                                     "text": "$(project)",
-                                    "title": "Reload Vue Project",
+                                    "title": "Volar Reload Projects",
                                     "commandId": "volar.action.reloadProject",
-                                    "statusBarProgressMessage": "Reload Vue Project"
+                                    "statusBarProgressMessage": "Volar Reload Projects"
                                 },
                                 {
                                     "text": "$(server-process)",
@@ -166,6 +172,34 @@
                                     "commandId": "volar.action.restartServer"
                                 }
                             ]
+                        }
+                    ]
+                },
+                "reload-can-solve-any-problems.reloadServers": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "extensionId": {
+                                "type": "string"
+                            },
+                            "commandId": {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "default": [
+                        {
+                            "extensionId": "dbaeumer.vscode-eslint",
+                            "commandId": "eslint.restart"
+                        },
+                        {
+                            "extensionId": "vscode.typescript-language-features",
+                            "commandId": "typescript.reloadProjects"
+                        },
+                        {
+                            "extensionId": "Vue.volar",
+                            "commandId": "volar.action.reloadProject"
                         }
                     ]
                 }

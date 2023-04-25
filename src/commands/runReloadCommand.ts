@@ -1,6 +1,6 @@
-import { setTimeout } from 'node:timers/promises';
+import { commands } from 'vscode';
 
-import { window, commands, ProgressLocation } from 'vscode';
+import { runWithStatusBarProgress } from '../utils/window';
 
 interface RunReloadCommandArgs {
     extensionId: string;
@@ -10,21 +10,10 @@ interface RunReloadCommandArgs {
 }
 
 export async function runReloadCommand(args: RunReloadCommandArgs) {
+    const runCommand = () => commands.executeCommand(args.commandId, ...(args.args ?? []));
     if (args.statusBarProgressMessage) {
-        window.withProgress(
-            {
-                location: ProgressLocation.Window,
-                title: args.statusBarProgressMessage,
-            },
-            async (_progress) => {
-                await Promise.all([
-                    // make sure user can see the message
-                    setTimeout(2000),
-                    commands.executeCommand(args.commandId, ...(args.args ?? [])),
-                ]);
-            },
-        );
+        await runWithStatusBarProgress(runCommand, args.statusBarProgressMessage);
     } else {
-        await commands.executeCommand(args.commandId, ...(args.args ?? []));
+        await runCommand();
     }
 }

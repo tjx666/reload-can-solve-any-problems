@@ -1,5 +1,5 @@
 export const extensionName = 'reload-can-solve-any-problems';
-const commandsArray = ['runReloadCommand'] as const;
+const commandsArray = ['runReloadCommand', 'reloadServers'] as const;
 
 type CommandsArrayUnion = (typeof commandsArray)[number];
 type Commands = {
@@ -10,6 +10,7 @@ export type Command = CommandsArrayUnion extends CommandsArrayUnion
     : never;
 
 export const commandIds = commandsArray.reduce((acc, item) => {
+    // @ts-expect-error ts bug
     acc[item] = `${extensionName}.${item}`;
     return acc;
 }, {} as Commands);

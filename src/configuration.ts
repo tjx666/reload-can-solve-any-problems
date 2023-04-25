@@ -19,12 +19,17 @@ interface Configuration {
             statusBarProgressMessage?: string;
         }>;
     }>;
+    reloadServers: Array<{
+        extensionId: string;
+        commandId: string;
+    }>;
 }
 
 export const configuration = {} as Configuration;
 export function updateConfiguration() {
     const extensionConfig = vscode.workspace.getConfiguration(extensionName);
-    configuration.statusBar = extensionConfig.get('statusBar') as Configuration['statusBar'];
-    configuration.reloadItems = extensionConfig.get('reloadItems') as Configuration['reloadItems'];
+    configuration.statusBar = extensionConfig.get('statusBar') as any;
+    configuration.reloadItems = extensionConfig.get('reloadItems') as any;
+    configuration.reloadServers = extensionConfig.get('reloadServers') as any;
 }
 updateConfiguration();

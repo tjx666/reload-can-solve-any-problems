@@ -42,6 +42,9 @@ export function activate(context: ExtensionContext) {
                 (mod.runReloadCommand as any)(...args),
             );
         }),
+        commands.registerCommand(commandIds.reloadServers, (...args: any[]) => {
+            import('./commands/reloadServers').then((mod) => (mod.reloadServers as any)(...args));
+        }),
     );
 
     createReloadStatusBarItem();
