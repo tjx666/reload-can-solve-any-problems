@@ -28,7 +28,15 @@ interface Configuration {
 export const configuration = {} as Configuration;
 export function updateConfiguration() {
     const extensionConfig = vscode.workspace.getConfiguration(extensionName);
-    configuration.statusBar = extensionConfig.get('statusBar') as any;
+    configuration.statusBar = Object.assign(
+        {
+            text: '$(debug-restart)',
+            commandId: 'workbench.action.reloadWindow',
+            alignment: 'left',
+            priority: 100,
+        } as const,
+        extensionConfig.get('statusBar'),
+    );
     configuration.reloadItems = extensionConfig.get('reloadItems') as any;
     configuration.reloadServers = extensionConfig.get('reloadServers') as any;
 }

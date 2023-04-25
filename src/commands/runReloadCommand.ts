@@ -1,4 +1,4 @@
-import { commands } from 'vscode';
+import { window, commands } from 'vscode';
 
 import { runWithStatusBarProgress } from '../utils/window';
 
@@ -10,7 +10,16 @@ interface RunReloadCommandArgs {
 }
 
 export async function runReloadCommand(args: RunReloadCommandArgs) {
-    const runCommand = () => commands.executeCommand(args.commandId, ...(args.args ?? []));
+    const runCommand = async () => {
+        try {
+            await commands.executeCommand(args.commandId, ...(args.args ?? []));
+        } catch (error) {
+            console.error(error);
+            window.showErrorMessage(
+                `Execute command: ${args.commandId} of extension ${args.extensionId} failed!\n${error}`,
+            );
+        }
+    };
     if (args.statusBarProgressMessage) {
         await runWithStatusBarProgress(runCommand, args.statusBarProgressMessage);
     } else {

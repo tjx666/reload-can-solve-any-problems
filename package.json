@@ -77,19 +77,18 @@
                             "description": "The priority of the item. Higher values mean the item should be shown more to the left.",
                             "type": "number"
                         }
-                    },
-                    "default": {
-                        "text": "$(debug-restart)",
-                        "commandId": "workbench.action.reloadWindow",
-                        "alignment": "left",
-                        "priority": 100
                     }
                 },
                 "reload-can-solve-any-problems.reloadItems": {
                     "description": "Will only show the items of enabled extensions",
                     "type": "array",
-                    "reloadItems": {
+                    "items": {
                         "type": "object",
+                        "required": [
+                            "name",
+                            "extensionId",
+                            "operations"
+                        ],
                         "properties": {
                             "name": {
                                 "description": "shown on left side of tooltip",
@@ -104,6 +103,11 @@
                                 "type": "array",
                                 "items": {
                                     "type": "object",
+                                    "required": [
+                                        "text",
+                                        "title",
+                                        "commandId"
+                                    ],
                                     "properties": {
                                         "text": {
                                             "description": "Operation item text",
@@ -169,7 +173,8 @@
                                 {
                                     "text": "$(server-process)",
                                     "title": "Restart Vue Server",
-                                    "commandId": "volar.action.restartServer"
+                                    "commandId": "volar.action.restartServer",
+                                    "statusBarProgressMessage": "Restart Vue Server"
                                 }
                             ]
                         }
@@ -179,6 +184,10 @@
                     "type": "array",
                     "items": {
                         "type": "object",
+                        "required": [
+                            "extensionId",
+                            "commandId"
+                        ],
                         "properties": {
                             "extensionId": {
                                 "type": "string"
