@@ -1,5 +1,11 @@
 <!-- https://keepachangelog.com/en/1.0.0/ -->
 
+## 0.1.2 - 2023-04-26
+
+### Changed
+
+- change the status bar item default command to `reload-can-solve-any-problems.reloadServers`
+
 ## 0.1.1 - 2023-04-26
 
 ### Changed

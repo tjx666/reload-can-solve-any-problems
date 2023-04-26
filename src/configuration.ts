@@ -31,7 +31,7 @@ export function updateConfiguration() {
     configuration.statusBar = Object.assign(
         {
             text: '$(debug-restart)',
-            commandId: 'workbench.action.reloadWindow',
+            commandId: 'reload-can-solve-any-problems.reloadServers',
             alignment: 'left',
             priority: 100,
         } as const,

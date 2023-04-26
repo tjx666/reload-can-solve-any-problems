@@ -20,11 +20,13 @@
 
 You can totally control how the status bar and it's tooltip display.
 
+Following is the default settings:
+
 ```jsonc
 {
   "reload-can-solve-any-problems.statusBar": {
     "text": "$(debug-restart)",
-    "commandId": "workbench.action.reloadWindow",
+    "commandId": "reload-can-solve-any-problems.reloadServers",
     "alignment": "left",
     "priority": 100
   },
@@ -77,6 +79,7 @@ You can totally control how the status bar and it's tooltip display.
       ]
     }
   ],
+  // will reload the server in parallel
   "reload-can-solve-any-problems.reloadServers": [
     {
       "extensionId": "dbaeumer.vscode-eslint",
